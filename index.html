@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b09">
+<title>REDY STREAM | Latest Movies</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#080b09;color:#fff;font-family:Arial,sans-serif}
+:root{--gold:#d9ad55;--dark:#080b09}
+header{padding:20px 6%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #302719}
+.logo{color:var(--gold);font-size:25px;font-weight:900;letter-spacing:2px}
+nav{display:flex;gap:20px;align-items:center}
+nav a{color:#eee;text-decoration:none;font-size:14px}
+button{cursor:pointer;border:0}
+.lang{background:#201b12;color:var(--gold);padding:10px 14px;border:1px solid var(--gold);border-radius:7px}
+.hero{padding:85px 7%;text-align:center;background:radial-gradient(ellipse at center,#392a15,#080b09 70%)}
+.hero small{color:var(--gold);letter-spacing:4px}
+.hero h1{font-size:clamp(35px,8vw,65px);margin:20px 0;color:var(--gold)}
+.hero p{color:#ccc;line-height:1.8;max-width:600px;margin:auto}
+.gold-btn{display:inline-block;margin-top:25px;background:var(--gold);color:#111;padding:14px 25px;border-radius:7px;text-decoration:none;font-weight:bold}
+section{padding:45px 6%}
+.heading{color:var(--gold);font-size:25px;margin-bottom:12px}
+.sub{color:#aaa;margin-bottom:22px}
+.search{width:100%;padding:15px;background:#171b18;border:1px solid #51432a;border-radius:8px;color:white;margin:15px 0 25px}
+.categories{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:25px}
+.categories button{padding:10px 16px;background:#1b1c19;color:#ddd;border-radius:20px;border:1px solid #51432a}
+.categories button.active{background:var(--gold);color:#111}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(145px,1fr));gap:17px}
+.movie{background:#171a17;border:1px solid #302719;border-radius:10px;overflow:hidden}
+.poster{height:190px;display:flex;align-items:center;justify-content:center;text-align:center;padding:15px;background:linear-gradient(145deg,#4a3719,#101310)}
+.poster span{color:var(--gold);font-size:21px;font-weight:bold}
+.movie-info{padding:13px}
+.movie-info h3{font-size:16px;margin-bottom:8px}
+.movie-info p{font-size:12px;color:#aaa}
+.movie-info button{margin-top:12px;background:transparent;color:var(--gold);border:1px solid var(--gold);padding:9px;border-radius:5px;width:100%}
+.notice{padding:20px;border:1px solid #51432a;border-radius:10px;background:#17140f;color:#d7c49d;line-height:1.7;margin-top:25px}
+.contact{text-align:center;background:#15140f}
+footer{text-align:center;padding:25px;color:#999;font-size:13px;border-top:1px solid #302719}
+footer strong{color:var(--gold)}
+@media(max-width:550px){header{padding:16px 4%}.logo{font-size:19px}nav{gap:10px}nav a{font-size:12px}.hero{padding:65px 5%}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.poster{height:165px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">REDY STREAM</div>
+<nav>
+<a href="#home" id="navHome">Home</a>
+<a href="#movies" id="navMovies">Movies</a>
+<a href="#contact" id="navContact">Contact</a>
+<button class="lang" onclick="changeLang()" id="langBtn">SW</button>
+</nav>
+</header>
+
+<div class="hero" id="home">
+<small>WELCOME TO YOUR MOVIE HUB</small>
+<h1>REDY STREAM</h1>
+<p id="heroText">Discover movies, explore stories and enjoy premium entertainment.</p>
+<a href="#movies" class="gold-btn" id="explore">EXPLORE MOVIES</a>
+</div>
+
+<section id="movies">
+<h2 class="heading" id="movieHeading">Explore Movies</h2>
+<p class="sub" id="movieSub">Discover entertainment from different genres.</p>
+
+<input class="search" id="search" placeholder="Search movies..." oninput="filterMovies()">
+
+<div class="categories">
+<button class="active" onclick="filterCategory('All',this)" id="all">All</button>
+<button onclick="filterCategory('Action',this)" id="action">Action</button>
+<button onclick="filterCategory('Drama',this)" id="drama">Drama</button>
+<button onclick="filterCategory('Thriller',this)" id="thriller">Thriller</button>
+<button onclick="filterCategory('Comedy',this)" id="comedy">Comedy</button>
+</div>
+
+<div class="grid" id="movieGrid">
+<div class="movie" data-category="Action">
+<div class="poster"><span>REDY<br>ACTION</span></div>
+<div class="movie-info"><h3>Action Movies</h3><p>Action • Adventure</p><button onclick="contact()">More Details</button></div>
+</div>
+<div class="movie" data-category="Drama">
+<div class="poster"><span>REDY<br>DRAMA</span></div>
+<div class="movie-info"><h3>Drama Movies</h3><p>Drama • Stories</p><button onclick="contact()">More Details</button></div>
+</div>
+<div class="movie" data-category="Thriller">
+<div class="poster"><span>REDY<br>THRILLER</span></div>
+<div class="movie-info"><h3>Thriller Movies</h3><p>Mystery • Suspense</p><button onclick="contact()">More Details</button></div>
+</div>
+<div class="movie" data-category="Comedy">
+<div class="poster"><span>REDY<br>COMEDY</span></div>
+<div class="movie-info"><h3>Comedy Movies</h3><p>Comedy • Fun</p><button onclick="contact()">More Details</button></div>
+</div>
+</div>
+
+<div class="notice" id="notice">
+These are demonstration categories. Official movie titles and licensed content will be added soon.
+</div>
+</section>
+
+<section class="contact" id="contact">
+<h2 class="heading" id="contactHeading">Let's Connect</h2>
+<p id="contactText">Have a question or business inquiry? Contact REDY STREAM.</p>
+<a href="https://www.tiktok.com/@behumble3000" target="_blank" rel="noopener" class="gold-btn" id="contactBtn">CONTACT US ON TIKTOK</a>
+</section>
+
+<footer>
+<strong>REDY STREAM</strong><br><br>
+Latest Movies • Entertainment • Business<br><br>
+© 2026 REDY STREAM. All rights reserved.
+</footer>
+
+<script>
+let sw=false;
+let category='All';
+
+function changeLang(){
+sw=!sw;
+document.getElementById('langBtn').textContent=sw?'EN':'SW';
+document.getElementById('navHome').textContent=sw?'Mwanzo':'Home';
+document.getElementById('navMovies').textContent=sw?'Movies':'Movies';
+document.getElementById('navContact').textContent=sw?'Mawasiliano':'Contact';
+document.getElementById('heroText').textContent=sw?'Gundua movies, furahia simulizi na burudani bora.':'Discover movies, explore stories and enjoy premium entertainment.';
+document.getElementById('explore').textContent=sw?'TAZAMA MOVIES':'EXPLORE MOVIES';
+document.getElementById('movieHeading').textContent=sw?'Gundua Movies':'Explore Movies';
+document.getElementById('movieSub').textContent=sw?'Gundua burudani za aina mbalimbali.':'Discover entertainment from different genres.';
+document.getElementById('search').placeholder=sw?'Tafuta movie...':'Search movies...';
+document.getElementById('all').textContent=sw?'Zote':'All';
+document.getElementById('action').textContent=sw?'Action':'Action';
+document.getElementById('drama').textContent='Drama';
+document.getElementById('thriller').textContent='Thriller';
+document.getElementById('comedy').textContent=sw?'Vichekesho':'Comedy';
+document.getElementById('notice').textContent=sw?'Hizi ni categories za mfano. Movie rasmi zitaongezwa baada ya kupata ruhusa za usambazaji.':'These are demonstration categories. Official movie titles and licensed content will be added soon.';
+document.getElementById('contactHeading').textContent=sw?'Wasiliana Nasi':'Let’s Connect';
+document.getElementById('contactText').textContent=sw?'Una swali au unahitaji kufanya biashara? Wasiliana na REDY STREAM.':'Have a question or business inquiry? Contact REDY STREAM.';
+document.getElementById('contactBtn').textContent=sw?'WASILIANA NASI TIKTOK':'CONTACT US ON TIKTOK';
+document.querySelectorAll('.movie-info button').forEach(b=>b.textContent=sw?'Maelezo zaidi':'More Details');
+}
+
+function filterCategory(cat,btn){
+category=cat;
+document.querySelectorAll('.categories button').forEach(b=>b.classList.remove('active'));
+btn.classList.add('active');
+filterMovies();
+}
+
+function filterMovies(){
+let q=document.getElementById('search').value.toLowerCase();
+document.querySelectorAll('.movie').forEach(m=>{
+let matchCategory=category==='All'||m.dataset.category===category;
+let matchSearch=m.innerText.toLowerCase().includes(q);
+m.style.display=matchCategory&&matchSearch?'block':'none';
+});
+}
+
+function contact(){
+window.open('https://www.tiktok.com/@behumble3000','_blank');
+}
+</script>
+</body>
+</html>
